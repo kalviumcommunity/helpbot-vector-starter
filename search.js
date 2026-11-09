@@ -2,11 +2,11 @@
 // Plain JavaScript only. No packages, no API keys, no database needed.
 
 // ---------- Task 1 ----------
-// Cosine similarity of two equal-length number arrays:
-//   dot(a, b) = sum of a[i] * b[i]
-//   norm(a)   = Math.sqrt(dot(a, a))
-//   cosine    = dot(a, b) / (norm(a) * norm(b))
-function cosineSimilarity(a, b) {
+// Reciprocal Rank Fusion (RRF): merge two ranked id lists into ONE list.
+//   RRF score of an id = sum, over each list it appears in, of 1 / (k + rank)
+//   rank starts at 1 (first item = rank 1). Use k = 60.
+// Return ONE array of ids, highest RRF score first (each id appears once).
+function rrfFuse(keywordIds, semanticIds, k = 60) {
   // TODO
 }
 
@@ -20,4 +20,4 @@ function reciprocalRank(rankedIds, correctIds) {
   // TODO
 }
 
-module.exports = { cosineSimilarity, reciprocalRank };
+module.exports = { rrfFuse, reciprocalRank };

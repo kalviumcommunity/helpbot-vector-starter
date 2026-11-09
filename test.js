@@ -1,6 +1,6 @@
 // test.js — GIVEN, do not edit. Run with: npm test
 const { execFileSync } = require("child_process");
-const { cosineSimilarity, reciprocalRank } = require("./search.js");
+const { rrfFuse, reciprocalRank } = require("./search.js");
 
 let passed = 0, failed = 0;
 function check(name, actual, expected) {
@@ -16,10 +16,10 @@ function run(label, fn) {
   try { fn(); } catch (e) { failed++; console.log(`  FAIL  threw: ${e.message}`); }
 }
 
-run("Task 1 — cosineSimilarity", () => {
-  check("same direction = 1", cosineSimilarity([1, 2, 2], [2, 4, 4]), 1);
-  check("unrelated = 0", cosineSimilarity([2, 0], [0, 5]), 0);
-  check("[3,4] vs [4,3] = 0.96", cosineSimilarity([3, 4], [4, 3]), 0.96);
+run("Task 1 — rrfFuse", () => {
+  check("b is in both lists -> first", rrfFuse(["a", "b"], ["b", "c"]), ["b", "a", "c"]);
+  check("x in both, then z, then y", rrfFuse(["x", "y"], ["z", "x"]), ["x", "z", "y"]);
+  check("each id appears once", rrfFuse(["a", "b"], ["b", "c"]).length, 3);
 });
 
 run("Task 2 — reciprocalRank", () => {
@@ -35,7 +35,7 @@ let out = "";
 try { out = execFileSync("node", ["eval.js"], { encoding: "utf8" }); } catch (e) { out = ""; }
 
 run("Task 3 — MRR printed by eval.js", () => {
-  check("prints MRR: 0.57", out.includes("MRR: 0.57"), true);
+  check("prints MRR: 0.60", out.includes("MRR: 0.57"), true);
 });
 
 run("Task 4 — Recall printed by eval.js", () => {
