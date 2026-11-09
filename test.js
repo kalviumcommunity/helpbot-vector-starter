@@ -35,7 +35,7 @@ let out = "";
 try { out = execFileSync("node", ["eval.js"], { encoding: "utf8" }); } catch (e) { out = ""; }
 
 run("Task 3 — MRR printed by eval.js", () => {
-  check("prints MRR: 0.60", out.includes("MRR: 0.57"), true);
+  check("prints MRR: 0.60", out.includes("MRR: 0.60"), true);
 });
 
 run("Task 4 — Recall printed by eval.js", () => {
